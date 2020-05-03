@@ -1,5 +1,7 @@
 package botgolang
 
+import "io"
+
 //go:generate easyjson -all file.go
 
 type File struct {
@@ -17,4 +19,13 @@ type File struct {
 
 	// URL to the file
 	URL string `json:"url"`
+}
+
+// FileReader is lightweight interface wrap over `os.File` or any custom data
+type FileReader interface {
+	// Name should return filename
+	Name() string
+
+	// io.Reader interface
+	io.Reader
 }

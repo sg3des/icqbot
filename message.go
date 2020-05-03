@@ -2,7 +2,6 @@ package botgolang
 
 import (
 	"fmt"
-	"os"
 	"path/filepath"
 )
 
@@ -26,7 +25,7 @@ type Message struct {
 	ID string `json:"msgId"`
 
 	// File contains file attachment of the message
-	File *os.File `json:"-"`
+	File FileReader `json:"-"`
 
 	// Id of file to send
 	FileID string `json:"fileId"`
@@ -56,7 +55,7 @@ type Message struct {
 	InlineKeyboard [][]Button `json:"inlineKeyboardMarkup"`
 }
 
-func (m *Message) AttachNewFile(file *os.File) {
+func (m *Message) AttachNewFile(file FileReader) {
 	m.File = file
 	m.ContentType = OtherFile
 }
@@ -66,7 +65,7 @@ func (m *Message) AttachExistingFile(fileID string) {
 	m.ContentType = OtherFile
 }
 
-func (m *Message) AttachNewVoice(file *os.File) {
+func (m *Message) AttachNewVoice(file FileReader) {
 	m.File = file
 	m.ContentType = Voice
 }

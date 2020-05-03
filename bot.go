@@ -8,7 +8,6 @@ Crafted with love in @mail for your awesome bots.
 import (
 	"context"
 	"fmt"
-	"os"
 
 	"github.com/sirupsen/logrus"
 )
@@ -135,7 +134,7 @@ func (b *Bot) NewInlineKeyboardMessage(chatID, text string, keyboard [][]Button)
 }
 
 // NewFileMessage returns new file message
-func (b *Bot) NewFileMessage(chatID string, file *os.File) *Message {
+func (b *Bot) NewFileMessage(chatID string, file FileReader) *Message {
 	return &Message{
 		client:      b.client,
 		Chat:        Chat{ID: chatID},
@@ -155,7 +154,7 @@ func (b *Bot) NewFileMessageByFileID(chatID, fileID string) *Message {
 }
 
 // NewVoiceMessage returns new voice message
-func (b *Bot) NewVoiceMessage(chatID string, file *os.File) *Message {
+func (b *Bot) NewVoiceMessage(chatID string, file FileReader) *Message {
 	return &Message{
 		client:      b.client,
 		Chat:        Chat{ID: chatID},
