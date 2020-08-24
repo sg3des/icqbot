@@ -36,7 +36,7 @@ package main
 import "github.com/mail-ru-im/bot-golang"
 
 func main() {
-    bot, err := botgolang.NewBot(BOT_TOKEN)
+    bot, err := icqbot.NewBot(BOT_TOKEN)
     if err != nil {
         log.Println("wrong token")
     }
@@ -83,10 +83,10 @@ You don't need this.
 But if you do, you can override bot's API URL:
 
 ```go
-bot := botgolang.NewBot(BOT_TOKEN, botgolang.BotApiURL("https://agent.mail.ru/bot/v1"))
+bot := icqbot.NewBot(BOT_TOKEN, icqbot.BotApiURL("https://agent.mail.ru/bot/v1"))
 ```
 And debug all api requests and responses:
 
 ```go
-bot := botgolang.NewBot(BOT_TOKEN, botgolang.BotDebug(true))
+bot := icqbot.NewBot(BOT_TOKEN, icqbot.BotDebug(true))
 ```

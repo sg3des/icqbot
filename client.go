@@ -1,4 +1,4 @@
-package botgolang
+package icqbot
 
 import (
 	"bytes"

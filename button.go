@@ -1,4 +1,4 @@
-package botgolang
+package icqbot
 
 //go:generate easyjson -all button.go
 

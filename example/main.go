@@ -7,13 +7,13 @@ import (
 	"os"
 	"time"
 
-	"github.com/mail-ru-im/bot-golang"
+	"github.com/sg3des/icqbot"
 )
 
 func main() {
 	token := os.Getenv("TOKEN")
 
-	bot, err := botgolang.NewBot(token, botgolang.BotDebug(true))
+	bot, err := icqbot.NewBot(token, icqbot.BotDebug(true))
 	if err != nil {
 		log.Fatalf("cannot connect to bot: %s", err)
 	}
@@ -61,22 +61,22 @@ func main() {
 	for update := range updates {
 		fmt.Println(update.Type, update.Payload)
 		switch update.Type {
-		case botgolang.NEW_MESSAGE:
+		case icqbot.NEW_MESSAGE:
 			message := update.Payload.Message()
 
-			helloBtn := botgolang.NewCallbackButton("Hello", "echo")
-			goBtn := botgolang.NewURLButton("go", "https://golang.org/")
-			message.AttachInlineKeyboard([][]botgolang.Button{{helloBtn, goBtn}})
+			helloBtn := icqbot.NewCallbackButton("Hello", "echo")
+			goBtn := icqbot.NewURLButton("go", "https://golang.org/")
+			message.AttachInlineKeyboard([][]icqbot.Button{{helloBtn, goBtn}})
 
 			if err := message.Send(); err != nil {
 				log.Printf("failed to send message: %s", err)
 			}
-		case botgolang.EDITED_MESSAGE:
+		case icqbot.EDITED_MESSAGE:
 			message := update.Payload.Message()
 			if err := message.Reply("do not edit!"); err != nil {
 				log.Printf("failed to reply to message: %s", err)
 			}
-		case botgolang.CALLBACK_QUERY:
+		case icqbot.CALLBACK_QUERY:
 			data := update.Payload.CallbackQuery()
 			switch data.CallbackData {
 			case "echo":
